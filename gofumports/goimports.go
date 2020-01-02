@@ -149,7 +149,7 @@ func processFile(filename string, in io.Reader, out io.Writer, argType argumentT
 		return err
 	}
 
-	if !opt.Gofumpt {
+	if opt.Gofumpt {
 		// This is the only gofumpt change on gofumports's codebase, besides
 		// changing the name in the usage text.
 		res, err = internal.GofumptBytes(res)
