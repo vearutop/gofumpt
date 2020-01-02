@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/vearutop/gofumpt/gofumports/internal/fastwalk"
+	"github.com/vearutop/goimports/gofumports/internal/fastwalk"
 )
 
 // Options controls the behavior of a Walk call.

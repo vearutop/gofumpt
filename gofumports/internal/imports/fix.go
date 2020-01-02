@@ -26,7 +26,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/vearutop/gofumpt/gofumports/internal/gopathwalk"
+	"github.com/vearutop/goimports/gofumports/internal/gopathwalk"
 	"golang.org/x/tools/go/ast/astutil"
 	"golang.org/x/tools/go/packages"
 )

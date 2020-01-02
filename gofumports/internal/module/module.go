@@ -24,7 +24,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/vearutop/gofumpt/gofumports/internal/semver"
+	"github.com/vearutop/goimports/gofumports/internal/semver"
 )
 
 // A Version is defined by a module path and version pair.

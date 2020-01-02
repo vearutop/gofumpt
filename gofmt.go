@@ -2,6 +2,8 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
+// +build ignore
+
 package main
 
 import (
@@ -21,8 +23,8 @@ import (
 	"runtime/pprof"
 	"strings"
 
-	"github.com/vearutop/gofumpt/internal"
-	"github.com/vearutop/gofumpt/internal/diff"
+	"github.com/vearutop/goimports/internal"
+	"github.com/vearutop/goimports/internal/diff"
 )
 
 var (

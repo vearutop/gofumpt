@@ -2,7 +2,7 @@
 // Use of this source code is governed by a BSD-style
 // license that can be found in the LICENSE file.
 
-package main
+package gofumports
 
 import (
 	"bufio"
@@ -22,8 +22,8 @@ import (
 	"runtime/pprof"
 	"strings"
 
-	"github.com/vearutop/gofumpt/gofumports/internal/imports"
-	"github.com/vearutop/gofumpt/internal"
+	"github.com/vearutop/goimports/gofumports/internal/imports"
+	"github.com/vearutop/goimports/internal"
 )
 
 var (
@@ -58,7 +58,7 @@ func init() {
 	flag.StringVar(&options.Env.LocalPrefix, "local", "", "put imports beginning with this string after 3rd-party packages; comma-separated list")
 	flag.BoolVar(&options.FormatOnly, "format-only", false, "if true, don't fix imports and only format. In this mode, gofumports is effectively gofmt, with the addition that imports are grouped into sections.")
 	flag.BoolVar(&options.SquashGroups, "squash-groups", false, "if true, existing groups of imports are merged in single group before formatting.")
-	flag.BoolVar(&options.Gofmt, "gofmt", false, "if true, gofumports uses gofmt instead of gofumpt.")
+	flag.BoolVar(&options.Gofumpt, "gofumpt", false, "if true, gofumpt is applied.")
 }
 
 func report(err error) {
@@ -149,7 +149,7 @@ func processFile(filename string, in io.Reader, out io.Writer, argType argumentT
 		return err
 	}
 
-	if !opt.Gofmt {
+	if !opt.Gofumpt {
 		// This is the only gofumpt change on gofumports's codebase, besides
 		// changing the name in the usage text.
 		res, err = internal.GofumptBytes(res)
@@ -207,7 +207,7 @@ func walkDir(path string) {
 	filepath.Walk(path, visitFile)
 }
 
-func main() {
+func Main() {
 	runtime.GOMAXPROCS(runtime.NumCPU())
 
 	// call gofmtMain in a separate function

@@ -40,7 +40,7 @@ type Options struct {
 	TabWidth  int  // Tab width (8 if nil *Options provided)
 
 	SquashGroups bool // Squash existing groups before formatting
-	Gofmt        bool // Use gofmt instead of gofumpt
+	Gofumpt      bool // Use gofumpt instead of gofmt
 	FormatOnly   bool // Disable the insertion and deletion of imports
 }
 
@@ -238,7 +238,7 @@ func parse(fset *token.FileSet, filename string, src []byte, opt *Options) (*ast
 	psrc := append([]byte(prefix), src...)
 	file, err = parser.ParseFile(fset, filename, psrc, parserMode)
 	if err == nil {
-		// Gofmt will turn the ; into a \n.
+		// Gofumpt will turn the ; into a \n.
 		// Do that ourselves now and update the file contents,
 		// so that positions and line numbers are correct going forward.
 		psrc[len(prefix)-1] = '\n'
@@ -274,10 +274,10 @@ func parse(fset *token.FileSet, filename string, src []byte, opt *Options) (*ast
 	if err == nil {
 		adjust := func(orig, src []byte) []byte {
 			// Remove the wrapping.
-			// Gofmt has turned the ; into a \n\n.
+			// Gofumpt has turned the ; into a \n\n.
 			src = src[len("package p\n\nfunc _() {"):]
 			src = src[:len(src)-len("}\n")]
-			// Gofmt has also indented the function body one level.
+			// Gofumpt has also indented the function body one level.
 			// Remove that indent.
 			src = bytes.Replace(src, []byte("\n\t"), []byte("\n"), -1)
 			return matchSpace(orig, src)

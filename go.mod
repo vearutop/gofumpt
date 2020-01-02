@@ -1,4 +1,4 @@
-module github.com/vearutop/gofumpt
+module github.com/vearutop/goimports
 
 go 1.12
 

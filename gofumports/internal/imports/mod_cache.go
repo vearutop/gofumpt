@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/vearutop/gofumpt/gofumports/internal/gopathwalk"
+	"github.com/vearutop/goimports/gofumports/internal/gopathwalk"
 )
 
 // To find packages to import, the resolver needs to know about all of the

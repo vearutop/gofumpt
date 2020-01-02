@@ -4,7 +4,7 @@
 
 // +build gc
 
-package main
+package gofumports
 
 import (
 	"flag"
