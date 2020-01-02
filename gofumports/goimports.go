@@ -57,6 +57,8 @@ func init() {
 	flag.BoolVar(&options.AllErrors, "e", false, "report all errors (not just the first 10 on different lines)")
 	flag.StringVar(&options.Env.LocalPrefix, "local", "", "put imports beginning with this string after 3rd-party packages; comma-separated list")
 	flag.BoolVar(&options.FormatOnly, "format-only", false, "if true, don't fix imports and only format. In this mode, gofumports is effectively gofmt, with the addition that imports are grouped into sections.")
+	flag.BoolVar(&options.SquashGroups, "squash-groups", false, "if true, existing groups of imports are merged in single group before formatting.")
+	flag.BoolVar(&options.Gofmt, "gofmt", false, "if true, gofumports uses gofmt instead of gofumpt.")
 }
 
 func report(err error) {
@@ -147,11 +149,13 @@ func processFile(filename string, in io.Reader, out io.Writer, argType argumentT
 		return err
 	}
 
-	// This is the only gofumpt change on gofumports's codebase, besides
-	// changing the name in the usage text.
-	res, err = internal.GofumptBytes(res)
-	if err != nil {
-		return err
+	if !opt.Gofmt {
+		// This is the only gofumpt change on gofumports's codebase, besides
+		// changing the name in the usage text.
+		res, err = internal.GofumptBytes(res)
+		if err != nil {
+			return err
+		}
 	}
 
 	if !bytes.Equal(src, res) {

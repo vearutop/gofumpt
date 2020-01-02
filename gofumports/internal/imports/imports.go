@@ -39,7 +39,9 @@ type Options struct {
 	TabIndent bool // Use tabs for indent (true if nil *Options provided)
 	TabWidth  int  // Tab width (8 if nil *Options provided)
 
-	FormatOnly bool // Disable the insertion and deletion of imports
+	SquashGroups bool // Squash existing groups before formatting
+	Gofmt        bool // Use gofmt instead of gofumpt
+	FormatOnly   bool // Disable the insertion and deletion of imports
 }
 
 // Process implements golang.org/x/tools/imports.Process with explicit context in env.
@@ -191,8 +193,8 @@ func formatFile(fileSet *token.FileSet, file *ast.File, src []byte, adjust func(
 	if adjust != nil {
 		out = adjust(src, out)
 	}
-	if len(spacesBefore) > 0 {
-		out, err = addImportSpaces(bytes.NewReader(out), spacesBefore)
+	if len(spacesBefore) > 0 || opt.SquashGroups {
+		out, err = setupImportSpaces(bytes.NewReader(out), spacesBefore, opt.SquashGroups)
 		if err != nil {
 			return nil, err
 		}
@@ -359,11 +361,16 @@ func matchSpace(orig []byte, src []byte) []byte {
 
 var impLine = regexp.MustCompile(`^\s+(?:[\w\.]+\s+)?"(.+)"`)
 
-func addImportSpaces(r io.Reader, breaks []string) ([]byte, error) {
+func setupImportSpaces(r io.Reader, breaks []string, squashGroups bool) ([]byte, error) {
 	var out bytes.Buffer
 	in := bufio.NewReader(r)
 	inImports := false
 	done := false
+
+	if squashGroups {
+		breaks = nil
+	}
+
 	for {
 		s, err := in.ReadString('\n')
 		if err == io.EOF {
@@ -382,6 +389,11 @@ func addImportSpaces(r io.Reader, breaks []string) ([]byte, error) {
 			done = true
 			inImports = false
 		}
+
+		if inImports && squashGroups && s == "\n" {
+			continue
+		}
+
 		if inImports && len(breaks) > 0 {
 			if m := impLine.FindStringSubmatch(s); m != nil {
 				if m[1] == breaks[0] {
