@@ -135,11 +135,11 @@ func copyInternal(files []string, dir string) {
 func fixImports(body string) string {
 	body = strings.Replace(body,
 		"golang.org/x/tools/internal/",
-		"mvdan.cc/gofumpt/gofumports/internal/",
+		"github.com/vearutop/gofumpt/gofumports/internal/",
 		-1)
 	body = strings.Replace(body,
 		"cmd/internal/",
-		"mvdan.cc/gofumpt/internal/",
+		"github.com/vearutop/gofumpt/internal/",
 		-1)
 	return body
 }

@@ -22,8 +22,8 @@ import (
 	"runtime/pprof"
 	"strings"
 
-	"mvdan.cc/gofumpt/gofumports/internal/imports"
-	"mvdan.cc/gofumpt/internal"
+	"github.com/vearutop/gofumpt/gofumports/internal/imports"
+	"github.com/vearutop/gofumpt/internal"
 )
 
 var (

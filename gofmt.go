@@ -21,8 +21,8 @@ import (
 	"runtime/pprof"
 	"strings"
 
-	"mvdan.cc/gofumpt/internal"
-	"mvdan.cc/gofumpt/internal/diff"
+	"github.com/vearutop/gofumpt/internal"
+	"github.com/vearutop/gofumpt/internal/diff"
 )
 
 var (

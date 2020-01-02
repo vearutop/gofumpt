@@ -15,9 +15,9 @@ import (
 	"strings"
 	"sync"
 
-	"mvdan.cc/gofumpt/gofumports/internal/gopathwalk"
-	"mvdan.cc/gofumpt/gofumports/internal/module"
-	"mvdan.cc/gofumpt/gofumports/internal/semver"
+	"github.com/vearutop/gofumpt/gofumports/internal/gopathwalk"
+	"github.com/vearutop/gofumpt/gofumports/internal/module"
+	"github.com/vearutop/gofumpt/gofumports/internal/semver"
 )
 
 // ModuleResolver implements resolver for modules using the go command as little

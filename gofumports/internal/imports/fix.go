@@ -26,9 +26,9 @@ import (
 	"unicode"
 	"unicode/utf8"
 
+	"github.com/vearutop/gofumpt/gofumports/internal/gopathwalk"
 	"golang.org/x/tools/go/ast/astutil"
 	"golang.org/x/tools/go/packages"
-	"mvdan.cc/gofumpt/gofumports/internal/gopathwalk"
 )
 
 // importToGroup is a list of functions which map from an import path to

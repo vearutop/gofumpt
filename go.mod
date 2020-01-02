@@ -7,5 +7,3 @@ require (
 	golang.org/x/tools v0.0.0-20191116214431-80313e1ba718
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 )
-
-replace mvdan.cc/gofumpt => github.com/vearutop/gofumpt v0.0.0-20200102232129-89024eebba23
