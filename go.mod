@@ -1,4 +1,4 @@
-module mvdan.cc/gofumpt
+module github.com/vearutop/gofumpt
 
 go 1.12
 
