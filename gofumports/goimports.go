@@ -161,7 +161,7 @@ func processFile(filename string, in io.Reader, out io.Writer, argType argumentT
 		}
 	} else {
 		fset := token.NewFileSet()
-		file, err := parser.ParseFile(fset, "", src, parser.ParseComments)
+		file, err := parser.ParseFile(fset, "", res, parser.ParseComments)
 		if err != nil {
 			return err
 		}
