@@ -12,9 +12,7 @@ import (
 	"fmt"
 	"go/build"
 	"go/format"
-	"go/parser"
 	"go/scanner"
-	"go/token"
 	"io"
 	"io/ioutil"
 	"log"
@@ -160,17 +158,10 @@ func processFile(filename string, in io.Reader, out io.Writer, argType argumentT
 			return err
 		}
 	} else {
-		fset := token.NewFileSet()
-		file, err := parser.ParseFile(fset, "", res, parser.ParseComments)
+		res, err = format.Source(res)
 		if err != nil {
 			return err
 		}
-
-		var buf bytes.Buffer
-		if err := format.Node(&buf, fset, file); err != nil {
-			return err
-		}
-		res = buf.Bytes()
 	}
 
 	if !bytes.Equal(src, res) {
